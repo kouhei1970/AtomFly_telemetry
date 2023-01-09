@@ -10,14 +10,18 @@ void dataRecv(const uint8_t *addr, const uint8_t *data, int datasize) {
   //データ受信時に実行したい内容をここに書く。
   float a;
   uint8_t *dummy;
+  uint8_t offset = 2;
   dummy=(uint8_t*)&a;
   
-  for (uint8_t i=0; i<(datasize/4); i++)
+  dummy[0]=data[0];
+  dummy[1]=data[1];
+
+  for (uint8_t i=0; i<((datasize-offset)/4); i++)
   {
-    dummy[0]=data[i*4];
-    dummy[1]=data[i*4+1];
-    dummy[2]=data[i*4+2];
-    dummy[3]=data[i*4+3];
+    dummy[0]=data[i*4 + 0 + offset];
+    dummy[1]=data[i*4 + 1 + offset];
+    dummy[2]=data[i*4 + 2 + offset];
+    dummy[3]=data[i*4 + 3 + offset];
     Serial.printf("%9.4f ", a);
   }
   Serial.printf("\r\n");
