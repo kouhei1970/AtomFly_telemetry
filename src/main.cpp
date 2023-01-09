@@ -16,6 +16,7 @@ void dataRecv(const uint8_t *addr, const uint8_t *data, int datasize) {
   dummy[0]=data[0];
   dummy[1]=data[1];
 
+  if ((dummy[0]==99)&&(dummy[1]==99))Serial.printf("#PID Gain P Ti Td Eta ");
   for (uint8_t i=0; i<((datasize-offset)/4); i++)
   {
     dummy[0]=data[i*4 + 0 + offset];
